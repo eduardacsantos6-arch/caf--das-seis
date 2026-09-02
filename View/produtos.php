@@ -108,14 +108,14 @@
         </div>
 
 
-        <button class="botao-novo-pedido">
+        <button class="botao-novo-pedido"> <a href="../View/cadastro_produto.php">
 
             <span class="icone-botao">
                 +
             </span>
 
             Adicionar produto
-
+        </a>
         </button>
 
 

@@ -1,6 +1,109 @@
+<?php
 
+require_once "../Model/User.php";
+
+use Model\User;
+
+
+$userModel = new User();
+
+
+/*
+|--------------------------------------------------------------------------
+| BUSCAR FUNCIONÁRIOS
+|--------------------------------------------------------------------------
+*/
+
+$funcionarios = $userModel->getFuncionarios();
+
+
+if ($funcionarios === false) {
+
+    $funcionarios = [];
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SEPARAR FUNCIONÁRIOS POR TURNO
+|--------------------------------------------------------------------------
+*/
+
+$funcionariosAtuais = [];
+
+$proximoTurno = [];
+
+
+foreach ($funcionarios as $funcionario) {
+
+    /*
+    |--------------------------------------------------------------
+    | Cria a inicial do funcionário
+    | Exemplo:
+    | Maria Silva -> M
+    |--------------------------------------------------------------
+    */
+
+    $inicial = strtoupper(
+        substr(
+            $funcionario["nome"],
+            0,
+            1
+        )
+    );
+
+
+    /*
+    |--------------------------------------------------------------
+    | Adiciona a inicial ao array
+    |--------------------------------------------------------------
+    */
+
+    $funcionario["inicial"] = $inicial;
+
+
+    /*
+    |--------------------------------------------------------------
+    | Horário
+    |
+    | Aqui estamos mostrando o turno_id por enquanto.
+    | Depois podemos buscar os horários na tabela turno.
+    |--------------------------------------------------------------
+    */
+
+    $funcionario["horario"] =
+        "Turno " . $funcionario["turno_id"];
+
+
+    /*
+    |--------------------------------------------------------------
+    | FUNCIONÁRIOS TRABALHANDO AGORA
+    |--------------------------------------------------------------
+    */
+
+    if ($funcionario["status"] == "Trabalhando") {
+
+        $funcionariosAtuais[] = $funcionario;
+
+    } else {
+
+        /*
+        |----------------------------------------------------------
+        | FUNCIONÁRIOS DO PRÓXIMO TURNO
+        |----------------------------------------------------------
+        */
+
+        $proximoTurno[] = $funcionario;
+
+    }
+
+}
+
+?>
 
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
@@ -14,7 +117,16 @@
 
     <title>Funcionários | Café das 6</title>
 
-    <link rel="stylesheet" href="../templates/css/">
+
+    <!--
+        COLOQUE AQUI O NOME CORRETO
+        DO SEU CSS DE FUNCIONÁRIOS
+    -->
+
+    <link
+        rel="stylesheet"
+        href="../templates/css/funcionarios.css"
+    >
 
 </head>
 
@@ -27,7 +139,7 @@
     <div class="header-container">
 
 
-        <a href="index.php" class="logo">
+        <a href="home.php" class="logo">
 
             <div class="logo-icon">
                 ☕
@@ -59,7 +171,10 @@
                 ☕ Produtos
             </a>
 
-            <a href="funcionarios.php" class="ativo">
+            <a
+                href="funcionarios.php"
+                class="ativo"
+            >
                 👥 Funcionários
             </a>
 
@@ -108,7 +223,13 @@
         </div>
 
 
-        <button class="botao-novo-pedido">
+
+        <!-- BOTÃO PARA CADASTRAR FUNCIONÁRIO -->
+
+        <a
+            href="cadastro.php"
+            class="botao-novo-pedido"
+        >
 
             <span class="icone-botao">
                 +
@@ -116,14 +237,16 @@
 
             Adicionar funcionário
 
-        </button>
+        </a>
 
 
     </section>
 
 
 
+    <!-- ============================================ -->
     <!-- FUNCIONÁRIOS ATUAIS -->
+    <!-- ============================================ -->
 
     <section class="secao">
 
@@ -163,69 +286,87 @@
         <div class="funcionarios-grid">
 
 
-            <?php foreach ($funcionariosAtuais as $funcionario): ?>
+            <?php if (count($funcionariosAtuais) > 0): ?>
 
 
-                <article class="funcionario-card">
+                <?php foreach ($funcionariosAtuais as $funcionario): ?>
 
 
-                    <div class="funcionario-card-topo">
+                    <article class="funcionario-card">
 
 
-                        <div class="avatar grande">
+                        <div class="funcionario-card-topo">
+
+
+                            <div class="avatar grande">
+
+                                <?php
+                                echo $funcionario["inicial"];
+                                ?>
+
+                            </div>
+
+
+                            <span class="status-online">
+
+                                ● Trabalhando
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <h2>
 
                             <?php
-                                echo $funcionario["inicial"];
+                            echo $funcionario["nome"];
+                            ?>
+
+                        </h2>
+
+
+
+                        <p class="cargo">
+
+                            <?php
+                            echo $funcionario["cargo"];
+                            ?>
+
+                        </p>
+
+
+
+                        <div class="horario">
+
+                            🕒
+
+                            <?php
+                            echo $funcionario["horario"];
                             ?>
 
                         </div>
 
 
-                        <span class="status-online">
-
-                            ● Trabalhando
-
-                        </span>
+                    </article>
 
 
-                    </div>
+                <?php endforeach; ?>
 
 
-
-                    <h2>
-
-                        <?php
-                            echo $funcionario["nome"];
-                        ?>
-
-                    </h2>
+            <?php else: ?>
 
 
-                    <p class="cargo">
+                <p class="sem-funcionarios">
 
-                        <?php
-                            echo $funcionario["cargo"];
-                        ?>
+                    Nenhum funcionário está trabalhando
+                    no momento.
 
-                    </p>
-
+                </p>
 
 
-                    <div class="horario">
-
-                        🕒
-
-                        <?php
-                            echo $funcionario["horario"];
-                        ?>
-
-                    </div>
-
-
-                </article>
-
-
-            <?php endforeach; ?>
+            <?php endif; ?>
 
 
         </div>
@@ -235,7 +376,9 @@
 
 
 
+    <!-- ============================================ -->
     <!-- PRÓXIMO TURNO -->
+    <!-- ============================================ -->
 
     <section class="secao">
 
@@ -266,69 +409,87 @@
         <div class="funcionarios-grid">
 
 
-            <?php foreach ($proximoTurno as $funcionario): ?>
+            <?php if (count($proximoTurno) > 0): ?>
 
 
-                <article class="funcionario-card proximo-turno">
+                <?php foreach ($proximoTurno as $funcionario): ?>
 
 
-                    <div class="funcionario-card-topo">
+                    <article class="funcionario-card proximo-turno">
 
 
-                        <div class="avatar grande">
+                        <div class="funcionario-card-topo">
+
+
+                            <div class="avatar grande">
+
+                                <?php
+                                echo $funcionario["inicial"];
+                                ?>
+
+                            </div>
+
+
+                            <span class="status-turno">
+
+                                Próximo turno
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <h2>
 
                             <?php
-                                echo $funcionario["inicial"];
+                            echo $funcionario["nome"];
+                            ?>
+
+                        </h2>
+
+
+
+                        <p class="cargo">
+
+                            <?php
+                            echo $funcionario["cargo"];
+                            ?>
+
+                        </p>
+
+
+
+                        <div class="horario">
+
+                            🕒
+
+                            <?php
+                            echo $funcionario["horario"];
                             ?>
 
                         </div>
 
 
-                        <span class="status-turno">
-
-                            Próximo turno
-
-                        </span>
+                    </article>
 
 
-                    </div>
+                <?php endforeach; ?>
 
 
-
-                    <h2>
-
-                        <?php
-                            echo $funcionario["nome"];
-                        ?>
-
-                    </h2>
+            <?php else: ?>
 
 
-                    <p class="cargo">
+                <p class="sem-funcionarios">
 
-                        <?php
-                            echo $funcionario["cargo"];
-                        ?>
+                    Não há funcionários cadastrados
+                    para o próximo turno.
 
-                    </p>
-
+                </p>
 
 
-                    <div class="horario">
-
-                        🕒
-
-                        <?php
-                            echo $funcionario["horario"];
-                        ?>
-
-                    </div>
-
-
-                </article>
-
-
-            <?php endforeach; ?>
+            <?php endif; ?>
 
 
         </div>
@@ -338,10 +499,6 @@
 
 
 </main>
-
-
-<script src="src/js/script.js"></script>
-
 
 </body>
 
