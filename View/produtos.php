@@ -1,66 +1,4 @@
-<?php
 
-$produtos = [
-
-    [
-        "nome" => "Café Expresso",
-        "categoria" => "Cafés",
-        "preco" => "R$ 4,00",
-        "icone" => "☕"
-    ],
-
-    [
-        "nome" => "Cappuccino Cremoso",
-        "categoria" => "Cafés",
-        "preco" => "R$ 7,00",
-        "icone" => "☕"
-    ],
-
-    [
-        "nome" => "Café com Leite",
-        "categoria" => "Bebidas",
-        "preco" => "R$ 5,00",
-        "icone" => "🥛"
-    ],
-
-    [
-        "nome" => "Chocolate Quente",
-        "categoria" => "Bebidas",
-        "preco" => "R$ 8,00",
-        "icone" => "🍫"
-    ],
-
-    [
-        "nome" => "Pão de Queijo",
-        "categoria" => "Salgados",
-        "preco" => "R$ 6,00",
-        "icone" => "🧀"
-    ],
-
-    [
-        "nome" => "Croissant",
-        "categoria" => "Salgados",
-        "preco" => "R$ 9,00",
-        "icone" => "🥐"
-    ],
-
-    [
-        "nome" => "Bolo de Chocolate",
-        "categoria" => "Doces",
-        "preco" => "R$ 7,00",
-        "icone" => "🍰"
-    ],
-
-    [
-        "nome" => "Cookie",
-        "categoria" => "Doces",
-        "preco" => "R$ 5,00",
-        "icone" => "🍪"
-    ]
-
-];
-
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -76,7 +14,7 @@ $produtos = [
 
     <title>Produtos | Café das 6</title>
 
-    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="../templates/css/global.css">
 
 </head>
 
@@ -113,15 +51,15 @@ $produtos = [
 
         <nav class="menu">
 
-            <a href="index.php">
+            <a href="home.php">
                 🏠 Home
             </a>
 
-            <a href="produtos.php" class="ativo">
+            <a href="produtos.php">
                 ☕ Produtos
             </a>
 
-            <a href="funcionarios.php">
+            <a href="funcionarios.php" class="ativo">
                 👥 Funcionários
             </a>
 

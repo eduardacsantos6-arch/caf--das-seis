@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3eee8;
+    color: #3e2723;
+}
+
+/* ========================================= CONTAINER PRINCIPAL ========================================= */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ========================================= CARD DE LOGIN ========================================= */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+/* ========================================= LOGO ========================================= */
+.logo {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f4e37;
+    border-radius: 50%;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+/* ========================================= TÍTULO ========================================= */
+.login-card h1 {
+    margin-bottom: 5px;
+    color: #3e2723;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* ========================================= SUBTÍTULO ========================================= */
+.subtitle {
+    margin-bottom: 30px;
+    color: #795548;
+    font-size: 15px;
+}
+
+/* ========================================= GRUPOS DOS CAMPOS ========================================= */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* ========================================= LABELS ========================================= */
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #3e2723;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ========================================= INPUTS ========================================= */
+.form-group input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #d0c5bb;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #3e2723;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+/* Texto dentro do input */
+.form-group input::placeholder {
+    color: #a79b92;
+}
+
+/* Quando o usuário seleciona o campo */
+.form-group input:focus {
+    border-color: #6f4e37;
+    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.12);
+}
+
+/* ========================================= OPÇÕES DO LOGIN ========================================= */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 13px;
+}
+
+/* ========================================= LEMBRAR-ME ========================================= */
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #5d5048;
+    cursor: pointer;
+}
+
+.remember input {
+    cursor: pointer;
+}
+
+/* ========================================= ESQUECI MINHA SENHA ========================================= */
+.form-options a {
+    color: #6f4e37;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.form-options a:hover {
+    color: #563b2a;
+    text-decoration: underline;
+}
+
+/* ========================================= BOTÃO ENTRAR ========================================= */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #6f4e37;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Hover do botão */
+.btn-login:hover {
+    background-color: #563b2a;
+}
+
+/* Clique do botão */
+.btn-login:active {
+    transform: scale(0.98);
+}
+
+/* ========================================= ÁREA DE CADASTRO ========================================= */
+.register-area {
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid #e2d9d1;
+}
+
+/* Texto "Ainda não possui..." */
+.register-area p {
+    margin-bottom: 12px;
+    color: #795548;
+    font-size: 13px;
+}
+
+/* ========================================= BOTÃO CADASTRAR NOVO USUÁRIO ========================================= */
+.btn-register {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #6f4e37;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #6f4e37;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+/* Hover do cadastro */
+.btn-register:hover {
+    background-color: #6f4e37;
+    color: #ffffff;
+}
+
+/* ========================================= TEXTO DO RODAPÉ ========================================= */
+.footer-text {
+    margin-top: 25px;
+    color: #a79b92;
+    font-size: 12px;
+}
+
+/* ========================================= RESPONSIVIDADE ========================================= */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 30px 20px;
+        border-radius: 12px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+        font-size: 27px;
+    }
+
+    .login-card h1 {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

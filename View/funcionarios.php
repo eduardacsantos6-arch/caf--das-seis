@@ -1,57 +1,4 @@
-<?php
 
-$funcionariosAtuais = [
-
-    [
-        "nome" => "Mariana Souza",
-        "cargo" => "Atendente",
-        "horario" => "06:00 - 12:00",
-        "inicial" => "M"
-    ],
-
-    [
-        "nome" => "João Oliveira",
-        "cargo" => "Barista",
-        "horario" => "06:00 - 14:00",
-        "inicial" => "J"
-    ],
-
-    [
-        "nome" => "Carlos Lima",
-        "cargo" => "Cozinheiro",
-        "horario" => "06:00 - 15:00",
-        "inicial" => "C"
-    ]
-
-];
-
-
-$proximoTurno = [
-
-    [
-        "nome" => "Ana Martins",
-        "cargo" => "Atendente",
-        "horario" => "12:00 - 18:00",
-        "inicial" => "A"
-    ],
-
-    [
-        "nome" => "Pedro Santos",
-        "cargo" => "Barista",
-        "horario" => "14:00 - 20:00",
-        "inicial" => "P"
-    ],
-
-    [
-        "nome" => "Juliana Costa",
-        "cargo" => "Cozinheira",
-        "horario" => "15:00 - 21:00",
-        "inicial" => "J"
-    ]
-
-];
-
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -67,7 +14,7 @@ $proximoTurno = [
 
     <title>Funcionários | Café das 6</title>
 
-    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="../templates/css/">
 
 </head>
 
@@ -104,7 +51,7 @@ $proximoTurno = [
 
         <nav class="menu">
 
-            <a href="index.php">
+            <a href="home.php">
                 🏠 Home
             </a>
 
