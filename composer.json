@@ -1,0 +1,12 @@
+{
+    "name": "joao/cafe_das_seis",
+    "description": "projeto de cafeteria",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Joao\\CafeDasSeis\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
