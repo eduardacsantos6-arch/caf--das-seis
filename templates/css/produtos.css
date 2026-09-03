@@ -1,0 +1,609 @@
+/* ========================================
+   PÁGINA DE PRODUTOS
+   CAFÉ DAS 6
+======================================== */
+
+
+/* ========================================
+   FILTROS DE CATEGORIA
+======================================== */
+
+.filtros {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.filtro {
+
+    min-height: 43px;
+
+    padding: 0 19px;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    color: var(--cafe);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+
+        transform 0.25s,
+        background 0.25s,
+        color 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+
+}
+
+
+.filtro:hover {
+
+    transform: translateY(-2px);
+
+    border-color: var(--caramelo);
+
+    background: #fffaf5;
+
+    box-shadow:
+
+        0 7px 15px
+        rgba(61, 35, 21, 0.08);
+
+}
+
+
+.filtro:active {
+
+    transform: translateY(0);
+
+}
+
+
+/* Filtro selecionado */
+
+.ativo-filtro {
+
+    color: white;
+
+    border-color: transparent;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--cafe),
+            var(--cafe-escuro)
+        );
+
+    box-shadow:
+
+        0 8px 18px
+        rgba(61, 35, 21, 0.18);
+
+}
+
+
+/* ========================================
+   GRID DE PRODUTOS
+======================================== */
+
+.produtos-grid {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(4, 1fr);
+
+    gap: 22px;
+
+}
+
+
+/* ========================================
+   CARD DO PRODUTO
+======================================== */
+
+.produto-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 250px;
+
+    padding: 23px;
+
+    border-radius: 22px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fffaf6
+        );
+
+    border:
+
+        1px solid
+        var(--borda);
+
+    box-shadow:
+
+        0 10px 28px
+        rgba(61, 35, 21, 0.07);
+
+    transition:
+
+        transform 0.3s,
+        box-shadow 0.3s,
+        border-color 0.3s;
+
+}
+
+
+/* Detalhe decorativo */
+
+.produto-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+
+    height: 120px;
+
+    border-radius: 50%;
+
+    top: -60px;
+
+    right: -60px;
+
+    background:
+
+        rgba(226, 160, 95, 0.12);
+
+}
+
+
+/* Hover */
+
+.produto-card:hover {
+
+    transform:
+
+        translateY(-8px);
+
+    border-color:
+
+        var(--caramelo-claro);
+
+    box-shadow:
+
+        0 20px 40px
+        rgba(61, 35, 21, 0.14);
+
+}
+
+
+/* ========================================
+   TOPO DO PRODUTO
+======================================== */
+
+.produto-topo {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+}
+
+
+.produto-icone {
+
+    width: 62px;
+
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 20px;
+
+    font-size: 30px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff3e5,
+            #f5dfca
+        );
+
+    box-shadow:
+
+        inset 0 1px 2px
+        rgba(255, 255, 255, 0.9),
+
+        0 8px 16px
+        rgba(98, 57, 36, 0.08);
+
+}
+
+
+.categoria {
+
+    position: relative;
+
+    z-index: 1;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    color: var(--terracota);
+
+    background: #fbe7d7;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+/* ========================================
+   NOME DO PRODUTO
+======================================== */
+
+.produto-card h2 {
+
+    position: relative;
+
+    z-index: 1;
+
+    flex-grow: 1;
+
+    margin:
+
+        22px 0
+        16px;
+
+    font-family:
+
+        "Playfair Display",
+        serif;
+
+    font-size: 22px;
+
+    line-height: 1.25;
+
+    color: var(--texto);
+
+}
+
+
+/* ========================================
+   RODAPÉ DO CARD
+======================================== */
+
+.produto-footer {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-top: 17px;
+
+    border-top:
+
+        1px solid
+        #f0e4da;
+
+}
+
+
+.produto-footer strong {
+
+    color: var(--terracota);
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+}
+
+
+/* ========================================
+   BOTÃO ADICIONAR
+======================================== */
+
+.produto-footer form {
+
+    margin: 0;
+
+}
+
+
+.botao-adicionar {
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--terracota),
+            var(--laranja-cafe)
+        );
+
+    box-shadow:
+
+        0 9px 18px
+        rgba(196, 91, 55, 0.25);
+
+    transition:
+
+        transform 0.25s,
+        box-shadow 0.25s,
+        filter 0.25s;
+
+}
+
+
+.botao-adicionar:hover {
+
+    transform:
+
+        translateY(-3px)
+        rotate(90deg);
+
+    filter:
+
+        brightness(1.05);
+
+    box-shadow:
+
+        0 14px 24px
+        rgba(196, 91, 55, 0.35);
+
+}
+
+
+.botao-adicionar:active {
+
+    transform:
+
+        translateY(0)
+        scale(0.95);
+
+}
+
+
+/* ========================================
+   ESTADO DE PRODUTO INDISPONÍVEL
+   Para usar futuramente com PHP
+======================================== */
+
+.produto-indisponivel {
+
+    opacity: 0.65;
+
+}
+
+
+.produto-indisponivel .botao-adicionar {
+
+    cursor: not-allowed;
+
+    background:
+
+        #b7a69b;
+
+    box-shadow: none;
+
+}
+
+
+.produto-indisponivel .botao-adicionar:hover {
+
+    transform: none;
+
+}
+
+
+/* ========================================
+   MENSAGEM SEM PRODUTOS
+======================================== */
+
+.sem-produtos {
+
+    grid-column: 1 / -1;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    border:
+
+        1px dashed
+        var(--borda);
+
+    background:
+
+        rgba(255, 255, 255, 0.65);
+
+}
+
+
+.sem-produtos .icone-vazio {
+
+    font-size: 50px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.sem-produtos h2 {
+
+    font-family:
+
+        "Playfair Display",
+        serif;
+
+    margin-bottom: 8px;
+
+}
+
+
+.sem-produtos p {
+
+    color: var(--texto-suave);
+
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1200px) {
+
+    .produtos-grid {
+
+        grid-template-columns:
+
+            repeat(3, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .produtos-grid {
+
+        grid-template-columns:
+
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .filtros {
+
+        gap: 8px;
+
+    }
+
+
+    .filtro {
+
+        flex: 1;
+
+        min-width: 120px;
+
+        padding: 0 14px;
+
+    }
+
+
+    .produtos-grid {
+
+        grid-template-columns:
+
+            1fr;
+
+        gap: 17px;
+
+    }
+
+
+    .produto-card {
+
+        min-height: 220px;
+
+        padding: 20px;
+
+    }
+
+}

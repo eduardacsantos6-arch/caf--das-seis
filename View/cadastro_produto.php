@@ -1,4 +1,4 @@
-```php
+
 <?php
 
 require_once "../Model/Produto.php";
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $produtoModel = new Produto();
 
-    $resultado = $produtoModel->createProduto(
+    $resultado = $produtoModel->registerProduto(
         $nome,
         $categoria,
         $preco,
@@ -271,4 +271,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
-```

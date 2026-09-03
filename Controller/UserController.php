@@ -204,7 +204,7 @@ class UserController
         int $id
     )
     {
-        return $this->userModel->getUseInfo(
+        return $this->userModel->getUserInfo(
             $id
         );
     }

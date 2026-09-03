@@ -1,3 +1,214 @@
+<?php
+
+namespace Model;
+
+use Model\Connection;
+
+use PDO;
+use PDOException;
+
+class Produto
+{
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = Connection::getInstance();
+    }
+
+
+    /**
+     * Cadastra um novo produto
+     */
+    public function registerProduto(
+        string $nome,
+        string $categoria,
+        float $preco,
+        string $icone,
+        string $status
+    ): bool {
+
+        try {
+
+            $sql = "INSERT INTO produtos(
+                nome,
+                categoria,
+                preco,
+                icone,
+                status
+            ) VALUES (
+                :nome,
+                :categoria,
+                :preco,
+                :icone,
+                :status
+            )";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':categoria', $categoria);
+            $stmt->bindParam(':preco', $preco);
+            $stmt->bindParam(':icone', $icone);
+            $stmt->bindParam(':status', $status);
+
+            return $stmt->execute();
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao cadastrar produto: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+
+
+    /**
+     * Busca todos os produtos cadastrados
+     */
+    public function getProdutos()
+    {
+        try {
+
+            $sql = "SELECT * FROM produtos";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao buscar produtos: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+
+
+    /**
+     * Busca um produto pelo ID
+     */
+    public function getProdutoById(int $id)
+    {
+        try {
+
+            $sql = "SELECT * FROM produtos
+                    WHERE id = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(
+                ':id',
+                $id,
+                PDO::PARAM_INT
+            );
+
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao buscar produto: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+
+
+    /**
+     * Atualiza um produto
+     */
+    public function updateProduto(
+        int $id,
+        string $nome,
+        string $categoria,
+        float $preco,
+        string $icone,
+        string $status
+    ): bool {
+
+        try {
+
+            $sql = "UPDATE produtos SET
+                nome = :nome,
+                categoria = :categoria,
+                preco = :preco,
+                icone = :icone,
+                status = :status
+                WHERE id = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':categoria', $categoria);
+            $stmt->bindParam(':preco', $preco);
+            $stmt->bindParam(':icone', $icone);
+            $stmt->bindParam(':status', $status);
+
+            $stmt->bindParam(
+                ':id',
+                $id,
+                PDO::PARAM_INT
+            );
+
+            return $stmt->execute();
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao atualizar produto: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+
+
+    /**
+     * Exclui um produto
+     */
+    public function deleteProduto(int $id): bool
+    {
+        try {
+
+            $sql = "DELETE FROM produtos
+                    WHERE id = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(
+                ':id',
+                $id,
+                PDO::PARAM_INT
+            );
+
+            return $stmt->execute();
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao excluir produto: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+}
+?>
 
 
 <!DOCTYPE html>
@@ -14,7 +225,10 @@
 
     <title>Produtos | Café das 6</title>
 
-    <link rel="stylesheet" href="../templates/css/global.css">
+    <link
+        rel="stylesheet"
+        href="../templates/css/global.css"
+    >
 
 </head>
 
@@ -27,7 +241,7 @@
     <div class="header-container">
 
 
-        <a href="index.php" class="logo">
+        <a href="home.php" class="logo">
 
             <div class="logo-icon">
                 ☕
@@ -55,11 +269,14 @@
                 🏠 Home
             </a>
 
-            <a href="produtos.php">
+            <a
+                href="produtos.php"
+                class="ativo"
+            >
                 ☕ Produtos
             </a>
 
-            <a href="funcionarios.php" class="ativo">
+            <a href="funcionarios.php">
                 👥 Funcionários
             </a>
 
@@ -85,6 +302,8 @@
 <main class="dashboard">
 
 
+    <!-- TOPO DA PÁGINA -->
+
     <section class="pagina-topo">
 
 
@@ -108,15 +327,20 @@
         </div>
 
 
-        <button class="botao-novo-pedido"> <a href="../View/cadastro_produto.php">
+        <!-- BOTÃO FUNCIONAL -->
+
+        <a
+            href="cadastro_produto.php"
+            class="botao-novo-pedido"
+        >
 
             <span class="icone-botao">
                 +
             </span>
 
             Adicionar produto
+
         </a>
-        </button>
 
 
     </section>
@@ -128,33 +352,23 @@
     <section class="filtros">
 
         <button class="filtro ativo-filtro">
-
             Todos
-
         </button>
 
         <button class="filtro">
-
             ☕ Cafés
-
         </button>
 
         <button class="filtro">
-
             🥛 Bebidas
-
         </button>
 
         <button class="filtro">
-
             🥐 Salgados
-
         </button>
 
         <button class="filtro">
-
             🍰 Doces
-
         </button>
 
     </section>
@@ -166,72 +380,107 @@
     <section class="produtos-grid">
 
 
-        <?php foreach ($produtos as $produto): ?>
+        <?php if (count($produtos) > 0): ?>
 
 
-            <article class="produto-card">
+            <?php foreach ($produtos as $produto): ?>
 
 
-                <div class="produto-topo">
+                <article class="produto-card">
 
 
-                    <div class="produto-icone">
+                    <div class="produto-topo">
 
-                        <?php
-                            echo $produto["icone"];
-                        ?>
+
+                        <div class="produto-icone">
+
+                            <?php echo $produto["icone"]; ?>
+
+                        </div>
+
+
+                        <span class="categoria">
+
+                            <?php echo $produto["categoria"]; ?>
+
+                        </span>
+
 
                     </div>
 
 
-                    <span class="categoria">
 
-                        <?php
-                            echo $produto["categoria"];
-                        ?>
+                    <h2>
 
-                    </span>
+                        <?php echo $produto["nome"]; ?>
+
+                    </h2>
 
 
+
+                    <div class="produto-footer">
+
+
+                        <strong>
+
+                            R$
+
+                            <?php
+
+                            echo number_format(
+                                $produto["preco"],
+                                2,
+                                ",",
+                                "."
+                            );
+
+                            ?>
+
+                        </strong>
+
+
+
+                        <button
+                            class="botao-adicionar"
+                            type="button"
+                        >
+
+                            +
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+
+            <?php endforeach; ?>
+
+
+        <?php else: ?>
+
+
+            <div class="sem-produtos">
+
+                <div class="produto-icone">
+                    ☕
                 </div>
-
-
 
                 <h2>
-
-                    <?php
-                        echo $produto["nome"];
-                    ?>
-
+                    Nenhum produto cadastrado
                 </h2>
 
+                <p>
+                    Clique em "Adicionar produto" para
+                    cadastrar o primeiro produto da cafeteria.
+                </p>
 
-                <div class="produto-footer">
-
-
-                    <strong>
-
-                        <?php
-                            echo $produto["preco"];
-                        ?>
-
-                    </strong>
+            </div>
 
 
-                    <button class="botao-adicionar">
-
-                        +
-
-                    </button>
-
-
-                </div>
-
-
-            </article>
-
-
-        <?php endforeach; ?>
+        <?php endif; ?>
 
 
     </section>
@@ -240,8 +489,6 @@
 </main>
 
 
-<script src="src/js/script.js"></script>
-
-
 </body>
+
 </html>
