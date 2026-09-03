@@ -1,65 +1,99 @@
+<?php
 
+$mensagem = "";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $nome = $_POST["nome"];
+    $email = $_POST["email"];
+    $setor = $_POST["setor"];
+
+    $mensagem = "Cadastro enviado com sucesso!";
+}
+
+?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastro | Sistema da Cafeteria</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="../templates/css/cadastro.css">
+    <title>Cadastro | Café das 6</title>
+
+    <link rel="stylesheet" href="src/css/style.css">
+
 </head>
 
-<body>
 
-    <main class="cadastro-container">
+<body class="pagina-login">
 
-        <section class="cadastro-card">
 
-            <!-- Logo -->
+    <main class="container">
+
+
+        <section class="card-login">
+
+
             <div class="logo">
-                ☕
+
+                <div class="icone-cafe">
+                    ☕
+                </div>
+
+                <h1>Café das 6</h1>
+
+                <p>Cadastro de Funcionário</p>
+
             </div>
 
-            <h1>Criar conta</h1>
 
-            <p class="subtitle">
-                Cadastre um novo usuário no sistema
-            </p>
+            <h2>Crie sua conta</h2>
 
-            <form action="cadastro.php" method="POST">
 
-                <!-- Nome -->
-                <div class="form-group">
-                    <label for="nome">Nome completo</label>
+            <?php if ($mensagem != ""): ?>
+
+                <div class="mensagem sucesso">
+
+                    <?php echo $mensagem; ?>
+
+                </div>
+
+            <?php endif; ?>
+
+
+            <form method="POST">
+
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome completo
+                    </label>
 
                     <input
                         type="text"
                         id="nome"
                         name="nome"
-                        placeholder="Digite seu nome completo"
+                        placeholder="Digite seu nome"
                         required
                     >
+
                 </div>
 
-                <!-- Usuário -->
-                <div class="form-group">
-                    <label for="usuario">Nome de usuário</label>
 
-                    <input
-                        type="text"
-                        id="usuario"
-                        name="usuario"
-                        placeholder="Digite seu nome de usuário"
-                        required
-                    >
-                </div>
 
-                <!-- E-mail -->
-                <div class="form-group">
-                    <label for="email">E-mail</label>
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
 
                     <input
                         type="email"
@@ -68,55 +102,102 @@
                         placeholder="Digite seu e-mail"
                         required
                     >
+
                 </div>
 
-                <!-- Senha -->
-                <div class="form-group">
-                    <label for="senha">Senha</label>
+
+
+                <div class="campo">
+
+                    <label for="setor">
+                        Setor
+                    </label>
+
+                    <select
+                        id="setor"
+                        name="setor"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione seu setor
+                        </option>
+
+                        <option value="Administrativo">
+                            Administrativo
+                        </option>
+
+                        <option value="Tecnologia">
+                            Tecnologia
+                        </option>
+
+                        <option value="Produção">
+                            Produção
+                        </option>
+
+                        <option value="Recursos Humanos">
+                            Recursos Humanos
+                        </option>
+
+                        <option value="Financeiro">
+                            Financeiro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Crie uma senha
+                    </label>
 
                     <input
                         type="password"
                         id="senha"
                         name="senha"
-                        placeholder="Digite sua senha"
+                        placeholder="Digite uma senha"
                         required
                     >
+
                 </div>
 
-                <!-- Confirmar senha -->
-                <div class="form-group">
-                    <label for="confirmar_senha">
-                        Confirmar senha
-                    </label>
 
-                    <input
-                        type="password"
-                        id="confirmar_senha"
-                        name="confirmar_senha"
-                        placeholder="Digite a senha novamente"
-                        required
-                    >
-                </div>
 
-                <!-- Botão -->
-                <button type="submit" class="btn-cadastrar">
-                    Criar usuário
+                <button
+                    type="submit"
+                    class="botao"
+                >
+
+                    Cadastrar
+
                 </button>
+
 
             </form>
 
-            <!-- Voltar -->
-            <div class="back-login">
 
-                <a href="../index.html">
-                    ← Voltar para o login
+
+            <p class="link">
+
+                Já possui uma conta?
+
+                <a href="index.php">
+                    Fazer login
                 </a>
 
-            </div>
+            </p>
+
 
         </section>
 
+
     </main>
 
+
 </body>
+
 </html>
