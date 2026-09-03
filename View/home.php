@@ -1,49 +1,160 @@
 <?php
 
-$pedidosAbertos = 4;
-$pedidosPreparo = 3;
-$pedidosConcluidos = 12;
+namespace Model;
 
-$pedidos = [
+require_once __DIR__ . "/../Model/Connection.php";
 
-    [
-        "numero" => "#1042",
-        "cliente" => "Ana Souza",
-        "produto" => "Cappuccino",
-        "quantidade" => 1,
-        "status" => "Em preparo",
-        "classe" => "preparo"
-    ],
+use PDO;
+use PDOException;
 
-    [
-        "numero" => "#1043",
-        "cliente" => "João Silva",
-        "produto" => "Café Expresso",
-        "quantidade" => 2,
-        "status" => "Em aberto",
-        "classe" => "aberto"
-    ],
+class User
+{
+    private $db;
 
-    [
-        "numero" => "#1044",
-        "cliente" => "Maria Oliveira",
-        "produto" => "Pão de Queijo",
-        "quantidade" => 3,
-        "status" => "Concluído",
-        "classe" => "concluido"
-    ],
+    public function __construct()
+    {
+        $this->db = Connection::getInstance();
+    }
 
-    [
-        "numero" => "#1045",
-        "cliente" => "Carlos Santos",
-        "produto" => "Chocolate Quente",
-        "quantidade" => 1,
-        "status" => "Em preparo",
-        "classe" => "preparo"
-    ]
+    public function registerUser(
+        string $name,
+        string $email,
+        string $telefone,
+        string $cargo,
+        string $turno_id,
+        string $status,
+        string $data_cadastro
+    ): bool {
 
-];
+        try {
 
+            $sql = "INSERT INTO funcionario
+                    (
+                        nome,
+                        email,
+                        telefone,
+                        cargo,
+                        turno_id,
+                        status,
+                        data_cadastro
+                    )
+                    VALUES
+                    (
+                        :nome,
+                        :email,
+                        :telefone,
+                        :cargo,
+                        :turno_id,
+                        :status,
+                        :data_cadastro
+                    )";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(":nome", $name);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":telefone", $telefone);
+            $stmt->bindParam(":cargo", $cargo);
+            $stmt->bindParam(":turno_id", $turno_id);
+            $stmt->bindParam(":status", $status);
+            $stmt->bindParam(":data_cadastro", $data_cadastro);
+
+            return $stmt->execute();
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao registrar funcionário: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+
+
+    public function getUserByEmail(
+        string $email
+    ): array|bool {
+
+        try {
+
+            $sql = "
+                SELECT *
+                FROM funcionario
+                WHERE email = :email
+            ";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(
+                ":email",
+                $email,
+                PDO::PARAM_STR
+            );
+
+            $stmt->execute();
+
+            return $stmt->fetch(
+                PDO::FETCH_ASSOC
+            );
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao buscar funcionário: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+
+
+    public function getUserInfo(
+        int $id
+    ): array|bool {
+
+        try {
+
+            $sql = "
+                SELECT
+                    nome,
+                    email,
+                    telefone,
+                    cargo,
+                    turno_id,
+                    status,
+                    data_cadastro
+                FROM funcionario
+                WHERE id = :id
+            ";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(
+                ":id",
+                $id,
+                PDO::PARAM_INT
+            );
+
+            $stmt->execute();
+
+            return $stmt->fetch(
+                PDO::FETCH_ASSOC
+            );
+
+        } catch (PDOException $error) {
+
+            error_log(
+                "Erro ao buscar funcionário: " .
+                $error->getMessage()
+            );
+
+            return false;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -97,22 +208,24 @@ $pedidos = [
 
 
 
-        <nav class="menu">
+               <nav class="menu">
 
-            <a href="home.php">
+            <a href="../View/home.php">
                 🏠 Home
             </a>
 
-            <a href="produtos.php">
+            <a
+                href="../View/produtos.php"
+                class="ativo"
+            >
                 ☕ Produtos
             </a>
 
-            <a href="funcionarios.php" class="ativo">
+            <a href="../View/funcionarios.php">
                 👥 Funcionários
             </a>
 
         </nav>
-
 
 
         <div class="usuario">

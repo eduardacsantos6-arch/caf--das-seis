@@ -2,6 +2,8 @@
 
 namespace Model;
 
+require_once __DIR__ . "/../Model/Connection.php";
+
 use Model\Connection;
 
 use PDO;

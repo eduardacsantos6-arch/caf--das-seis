@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <title>Cadastro | Café das 6</title>
 
-    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="../templates/css/cadastro.css">
 
 </head>
 
@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 Já possui uma conta?
 
-                <a href="index.php">
+                <a href="../index.php">
                     Fazer login
                 </a>
 

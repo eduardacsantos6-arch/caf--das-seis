@@ -2,7 +2,7 @@
 
 namespace Model;
 
-use Model\Connection;
+require_once __DIR__ . "/../Model/Connection.php";
 
 use PDO;
 use PDOException;
@@ -16,10 +16,6 @@ class Produto
         $this->db = Connection::getInstance();
     }
 
-
-    /**
-     * Cadastra um novo produto
-     */
     public function registerProduto(
         string $nome,
         string $categoria,
@@ -30,13 +26,16 @@ class Produto
 
         try {
 
-            $sql = "INSERT INTO produtos(
+            $sql = "INSERT INTO produtos
+            (
                 nome,
                 categoria,
                 preco,
                 icone,
                 status
-            ) VALUES (
+            )
+            VALUES
+            (
                 :nome,
                 :categoria,
                 :preco,
@@ -46,11 +45,11 @@ class Produto
 
             $stmt = $this->db->prepare($sql);
 
-            $stmt->bindParam(':nome', $nome);
-            $stmt->bindParam(':categoria', $categoria);
-            $stmt->bindParam(':preco', $preco);
-            $stmt->bindParam(':icone', $icone);
-            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":categoria", $categoria);
+            $stmt->bindParam(":preco", $preco);
+            $stmt->bindParam(":icone", $icone);
+            $stmt->bindParam(":status", $status);
 
             return $stmt->execute();
 
@@ -66,10 +65,7 @@ class Produto
     }
 
 
-    /**
-     * Busca todos os produtos cadastrados
-     */
-    public function getProdutos()
+    public function getProdutos(): array
     {
         try {
 
@@ -88,25 +84,21 @@ class Produto
                 $error->getMessage()
             );
 
-            return false;
+            return [];
         }
     }
 
 
-    /**
-     * Busca um produto pelo ID
-     */
-    public function getProdutoById(int $id)
+    public function getProdutoById(int $id): array|bool
     {
         try {
 
-            $sql = "SELECT * FROM produtos
-                    WHERE id = :id";
+            $sql = "SELECT * FROM produtos WHERE id = :id";
 
             $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(
-                ':id',
+                ":id",
                 $id,
                 PDO::PARAM_INT
             );
@@ -127,9 +119,6 @@ class Produto
     }
 
 
-    /**
-     * Atualiza um produto
-     */
     public function updateProduto(
         int $id,
         string $nome,
@@ -151,14 +140,14 @@ class Produto
 
             $stmt = $this->db->prepare($sql);
 
-            $stmt->bindParam(':nome', $nome);
-            $stmt->bindParam(':categoria', $categoria);
-            $stmt->bindParam(':preco', $preco);
-            $stmt->bindParam(':icone', $icone);
-            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":categoria", $categoria);
+            $stmt->bindParam(":preco", $preco);
+            $stmt->bindParam(":icone", $icone);
+            $stmt->bindParam(":status", $status);
 
             $stmt->bindParam(
-                ':id',
+                ":id",
                 $id,
                 PDO::PARAM_INT
             );
@@ -177,20 +166,16 @@ class Produto
     }
 
 
-    /**
-     * Exclui um produto
-     */
     public function deleteProduto(int $id): bool
     {
         try {
 
-            $sql = "DELETE FROM produtos
-                    WHERE id = :id";
+            $sql = "DELETE FROM produtos WHERE id = :id";
 
             $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(
-                ':id',
+                ":id",
                 $id,
                 PDO::PARAM_INT
             );

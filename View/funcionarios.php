@@ -1,9 +1,8 @@
 <?php
 
-require_once "../Model/User.php";
+require_once __DIR__ . "/../Model/User.php";
 
 use Model\User;
-
 
 $userModel = new User();
 
@@ -16,11 +15,8 @@ $userModel = new User();
 
 $funcionarios = $userModel->getFuncionarios();
 
-
 if ($funcionarios === false) {
-
     $funcionarios = [];
-
 }
 
 
@@ -31,34 +27,25 @@ if ($funcionarios === false) {
 */
 
 $funcionariosAtuais = [];
-
 $proximoTurno = [];
-
 
 foreach ($funcionarios as $funcionario) {
 
     /*
     |--------------------------------------------------------------
     | Cria a inicial do funcionário
-    | Exemplo:
-    | Maria Silva -> M
     |--------------------------------------------------------------
     */
 
-    $inicial = strtoupper(
-        substr(
+    $inicial = mb_strtoupper(
+        mb_substr(
             $funcionario["nome"],
             0,
-            1
-        )
+            1,
+            "UTF-8"
+        ),
+        "UTF-8"
     );
-
-
-    /*
-    |--------------------------------------------------------------
-    | Adiciona a inicial ao array
-    |--------------------------------------------------------------
-    */
 
     $funcionario["inicial"] = $inicial;
 
@@ -67,8 +54,7 @@ foreach ($funcionarios as $funcionario) {
     |--------------------------------------------------------------
     | Horário
     |
-    | Aqui estamos mostrando o turno_id por enquanto.
-    | Depois podemos buscar os horários na tabela turno.
+    | Por enquanto mostramos o ID do turno.
     |--------------------------------------------------------------
     */
 
@@ -78,32 +64,23 @@ foreach ($funcionarios as $funcionario) {
 
     /*
     |--------------------------------------------------------------
-    | FUNCIONÁRIOS TRABALHANDO AGORA
+    | SEPARAR POR STATUS
     |--------------------------------------------------------------
     */
 
-    if ($funcionario["status"] == "Trabalhando") {
+    if ($funcionario["status"] === "Trabalhando") {
 
         $funcionariosAtuais[] = $funcionario;
 
-    } else {
-
-        /*
-        |----------------------------------------------------------
-        | FUNCIONÁRIOS DO PRÓXIMO TURNO
-        |----------------------------------------------------------
-        */
+    } elseif ($funcionario["status"] === "Próximo turno") {
 
         $proximoTurno[] = $funcionario;
-
     }
-
 }
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="pt-br">
 
 <head>
@@ -116,12 +93,6 @@ foreach ($funcionarios as $funcionario) {
     >
 
     <title>Funcionários | Café das 6</title>
-
-
-    <!--
-        COLOQUE AQUI O NOME CORRETO
-        DO SEU CSS DE FUNCIONÁRIOS
-    -->
 
     <link
         rel="stylesheet"
@@ -138,6 +109,8 @@ foreach ($funcionarios as $funcionario) {
 
     <div class="header-container">
 
+
+        <!-- LOGO -->
 
         <a href="home.php" class="logo">
 
@@ -160,6 +133,7 @@ foreach ($funcionarios as $funcionario) {
         </a>
 
 
+        <!-- MENU -->
 
         <nav class="menu">
 
@@ -181,6 +155,7 @@ foreach ($funcionarios as $funcionario) {
         </nav>
 
 
+        <!-- USUÁRIO -->
 
         <div class="usuario">
 
@@ -200,8 +175,11 @@ foreach ($funcionarios as $funcionario) {
 <main class="dashboard">
 
 
-    <section class="pagina-topo">
+    <!-- ============================================
+         TOPO DA PÁGINA
+    ============================================= -->
 
+    <section class="pagina-topo">
 
         <div>
 
@@ -209,11 +187,9 @@ foreach ($funcionarios as $funcionario) {
                 👥 EQUIPE
             </span>
 
-
             <h1>
                 Funcionários
             </h1>
-
 
             <p>
                 Acompanhe quem está trabalhando agora
@@ -221,7 +197,6 @@ foreach ($funcionarios as $funcionario) {
             </p>
 
         </div>
-
 
 
         <!-- BOTÃO PARA CADASTRAR FUNCIONÁRIO -->
@@ -239,29 +214,24 @@ foreach ($funcionarios as $funcionario) {
 
         </a>
 
-
     </section>
 
 
 
-    <!-- ============================================ -->
-    <!-- FUNCIONÁRIOS ATUAIS -->
-    <!-- ============================================ -->
+    <!-- ============================================
+         FUNCIONÁRIOS ATUAIS
+    ============================================= -->
 
     <section class="secao">
 
 
         <div class="secao-header">
 
-
             <div>
 
                 <span class="titulo-pequeno">
-
                     TURNO ATUAL
-
                 </span>
-
 
                 <h2>
                     🟢 Trabalhando agora
@@ -277,7 +247,6 @@ foreach ($funcionarios as $funcionario) {
                 funcionários
 
             </span>
-
 
         </div>
 
@@ -301,7 +270,11 @@ foreach ($funcionarios as $funcionario) {
                             <div class="avatar grande">
 
                                 <?php
-                                echo $funcionario["inicial"];
+                                echo htmlspecialchars(
+                                    $funcionario["inicial"],
+                                    ENT_QUOTES,
+                                    "UTF-8"
+                                );
                                 ?>
 
                             </div>
@@ -321,7 +294,11 @@ foreach ($funcionarios as $funcionario) {
                         <h2>
 
                             <?php
-                            echo $funcionario["nome"];
+                            echo htmlspecialchars(
+                                $funcionario["nome"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
                             ?>
 
                         </h2>
@@ -331,7 +308,11 @@ foreach ($funcionarios as $funcionario) {
                         <p class="cargo">
 
                             <?php
-                            echo $funcionario["cargo"];
+                            echo htmlspecialchars(
+                                $funcionario["cargo"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
                             ?>
 
                         </p>
@@ -343,7 +324,11 @@ foreach ($funcionarios as $funcionario) {
                             🕒
 
                             <?php
-                            echo $funcionario["horario"];
+                            echo htmlspecialchars(
+                                $funcionario["horario"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
                             ?>
 
                         </div>
@@ -376,9 +361,9 @@ foreach ($funcionarios as $funcionario) {
 
 
 
-    <!-- ============================================ -->
-    <!-- PRÓXIMO TURNO -->
-    <!-- ============================================ -->
+    <!-- ============================================
+         PRÓXIMO TURNO
+    ============================================= -->
 
     <section class="secao">
 
@@ -389,11 +374,8 @@ foreach ($funcionarios as $funcionario) {
             <div>
 
                 <span class="titulo-pequeno">
-
                     PRÓXIMO TURNO
-
                 </span>
-
 
                 <h2>
                     🕒 Entrando mais tarde
@@ -424,7 +406,11 @@ foreach ($funcionarios as $funcionario) {
                             <div class="avatar grande">
 
                                 <?php
-                                echo $funcionario["inicial"];
+                                echo htmlspecialchars(
+                                    $funcionario["inicial"],
+                                    ENT_QUOTES,
+                                    "UTF-8"
+                                );
                                 ?>
 
                             </div>
@@ -444,7 +430,11 @@ foreach ($funcionarios as $funcionario) {
                         <h2>
 
                             <?php
-                            echo $funcionario["nome"];
+                            echo htmlspecialchars(
+                                $funcionario["nome"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
                             ?>
 
                         </h2>
@@ -454,7 +444,11 @@ foreach ($funcionarios as $funcionario) {
                         <p class="cargo">
 
                             <?php
-                            echo $funcionario["cargo"];
+                            echo htmlspecialchars(
+                                $funcionario["cargo"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
                             ?>
 
                         </p>
@@ -466,7 +460,11 @@ foreach ($funcionarios as $funcionario) {
                             🕒
 
                             <?php
-                            echo $funcionario["horario"];
+                            echo htmlspecialchars(
+                                $funcionario["horario"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
                             ?>
 
                         </div>
@@ -499,6 +497,7 @@ foreach ($funcionarios as $funcionario) {
 
 
 </main>
+
 
 </body>
 

@@ -4,9 +4,31 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Joao\\CafeDasSeis\\": "src/"
-        }
+            "Joao\\CafeDasSeis\\": "caf--das-seis/",
+            "Controller\\": "Controller/",
+            "Model\\": "Model/"
+        },
+        "files": [
+            
+                "Config/configuration.php"
+            
+        ]
     },
+
+    "authors": [
+        {
+            "name": "João Pedro",
+            "email": "joao.p.santos28@ba.estudante.senai.br"
+        }, 
+        {
+            "name": "Eduarda Cardoso",
+            "email": "eduarda.c.santos6@ba.estudante.senai.br"
+        }
+
+        ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": ">=8.2",
+        "ext-mbstring": "*"
+    }
 }

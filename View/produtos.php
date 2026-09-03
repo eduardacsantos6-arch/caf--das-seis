@@ -265,18 +265,18 @@ class Produto
 
         <nav class="menu">
 
-            <a href="home.php">
+            <a href="../View/home.php">
                 🏠 Home
             </a>
 
             <a
-                href="produtos.php"
+                href="../View/produtos.php"
                 class="ativo"
             >
                 ☕ Produtos
             </a>
 
-            <a href="funcionarios.php">
+            <a href="../View/funcionarios.php">
                 👥 Funcionários
             </a>
 
