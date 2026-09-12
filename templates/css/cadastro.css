@@ -1,0 +1,358 @@
+/* ================================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   BODY
+================================ */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e8d5bd;
+    color: #3e2723;
+}
+
+
+/* ================================
+   PÁGINA DE LOGIN / CADASTRO
+================================ */
+
+.pagina-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            rgba(62, 39, 35, 0.12),
+            rgba(62, 39, 35, 0.12)
+        ),
+        #d8b894;
+
+    padding: 30px 15px;
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container {
+    width: 100%;
+    max-width: 450px;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.card-login {
+    background-color: #fffaf3;
+
+    width: 100%;
+    padding: 40px;
+
+    border-radius: 18px;
+
+    border: 1px solid #d2b48c;
+
+    box-shadow:
+        0 10px 30px rgba(62, 39, 35, 0.18);
+}
+
+
+/* ================================
+   LOGO
+================================ */
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/* Ícone de café */
+
+.icone-cafe {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #6f4e37;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+
+    box-shadow:
+        0 5px 12px rgba(62, 39, 35, 0.20);
+}
+
+
+/* Nome da cafeteria */
+
+.logo h1 {
+    color: #4e342e;
+
+    font-size: 30px;
+
+    margin-bottom: 6px;
+}
+
+
+/* Subtítulo */
+
+.logo p {
+    color: #8d6e63;
+
+    font-size: 15px;
+}
+
+
+/* ================================
+   TÍTULO
+================================ */
+
+.card-login h2 {
+    text-align: center;
+
+    color: #5d4037;
+
+    font-size: 22px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ================================
+   MENSAGEM DE SUCESSO
+================================ */
+
+.mensagem {
+    padding: 12px 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+.mensagem.sucesso {
+    background-color: #e8f0e4;
+
+    color: #4f633f;
+
+    border: 1px solid #b8c9aa;
+}
+
+
+.mensagem.erro {
+    background-color: #fbe4e4;
+
+    color: #8a3a3a;
+
+    border: 1px solid #e3b6b6;
+}
+
+
+/* ================================
+   CAMPOS
+================================ */
+
+.campo {
+    margin-bottom: 20px;
+}
+
+
+/* Labels */
+
+.campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #5d4037;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* Inputs e Select */
+
+.campo input,
+.campo select {
+    width: 100%;
+
+    height: 45px;
+
+    padding: 0 13px;
+
+    border: 1px solid #c7a98b;
+
+    border-radius: 8px;
+
+    background-color: #fffdf9;
+
+    color: #3e2723;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+/* Placeholder */
+
+.campo input::placeholder {
+    color: #a1887f;
+}
+
+
+/* Foco */
+
+.campo input:focus,
+.campo select:focus {
+    border-color: #795548;
+
+    box-shadow:
+        0 0 0 3px rgba(121, 85, 72, 0.15);
+}
+
+
+/* ================================
+   SELECT
+================================ */
+
+.campo select {
+    cursor: pointer;
+}
+
+
+/* ================================
+   BOTÃO
+================================ */
+
+.botao {
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background-color: #6f4e37;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+/* Efeito ao passar o mouse */
+
+.botao:hover {
+    background-color: #5d4037;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(62, 39, 35, 0.20);
+}
+
+
+/* Efeito ao clicar */
+
+.botao:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   LINK
+================================ */
+
+.link {
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #8d6e63;
+
+    font-size: 14px;
+}
+
+
+.link a {
+    color: #6f4e37;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    margin-left: 4px;
+
+    transition: 0.3s;
+}
+
+
+.link a:hover {
+    color: #3e2723;
+
+    text-decoration: underline;
+}
+
+
+/* ================================
+   RESPONSIVIDADE
+================================ */
+
+@media (max-width: 500px) {
+
+    .pagina-login {
+        padding: 20px 12px;
+    }
+
+    .card-login {
+        padding: 30px 22px;
+    }
+
+    .logo h1 {
+        font-size: 26px;
+    }
+
+    .card-login h2 {
+        font-size: 20px;
+    }
+
+}

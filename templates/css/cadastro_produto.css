@@ -1,0 +1,289 @@
+/* =========================================
+   CADASTRO DE PRODUTO - CAFÉ DAS 6
+========================================= */
+
+
+/* =========================================
+   CONTAINER PRINCIPAL
+========================================= */
+
+.cadastro-container {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 15px;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.cadastro-card {
+    width: 100%;
+    max-width: 460px;
+
+    padding: 40px;
+
+    background-color: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15);
+
+    text-align: center;
+}
+
+
+/* =========================================
+   LOGO (ícone circular)
+========================================= */
+
+.cadastro-card .logo {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--cafe, #6f4e37);
+
+    border-radius: 50%;
+
+    font-size: 30px;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.cadastro-card h1 {
+    margin-bottom: 5px;
+
+    color: var(--cafe-escuro, #3e2723);
+
+    font-size: 24px;
+}
+
+
+/* =========================================
+   SUBTÍTULO
+========================================= */
+
+.subtitle {
+    margin-bottom: 25px;
+
+    color: var(--texto-suave, #795548);
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   MENSAGEM DE ERRO
+========================================= */
+
+.mensagem-erro {
+    padding: 12px 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 8px;
+
+    background-color: #fbe4e4;
+
+    border: 1px solid #e3b6b6;
+
+    color: #8a3a3a;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   GRUPOS DE CAMPOS
+========================================= */
+
+.form-group {
+    margin-bottom: 18px;
+
+    text-align: left;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--cafe-escuro, #3e2723);
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d0c5bb;
+
+    border-radius: 8px;
+
+    background-color: #ffffff;
+
+    color: var(--cafe-escuro, #3e2723);
+
+    font-size: 15px;
+
+    font-family: inherit;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+.form-group input::placeholder {
+    color: #a79b92;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--cafe, #6f4e37);
+
+    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.12);
+}
+
+
+/* =========================================
+   GRUPO DE CHECKBOX (disponibilidade)
+========================================= */
+
+.form-group-checkbox label {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0;
+
+    color: #5d5048;
+
+    font-size: 14px;
+    font-weight: normal;
+
+    cursor: pointer;
+}
+
+
+.form-group-checkbox input {
+    width: auto;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   BOTÃO CADASTRAR
+========================================= */
+
+.btn-cadastrar {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--cafe, #6f4e37);
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.btn-cadastrar:hover {
+    background-color: var(--cafe-escuro, #563b2a);
+}
+
+
+.btn-cadastrar:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================
+   VOLTAR
+========================================= */
+
+.back-login {
+    margin-top: 22px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e2d9d1;
+}
+
+
+.back-login a {
+    color: var(--cafe, #6f4e37);
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+
+.back-login a:hover {
+    color: var(--cafe-escuro, #3e2723);
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .cadastro-card {
+        padding: 30px 20px;
+
+        border-radius: 12px;
+    }
+
+    .cadastro-card .logo {
+        width: 55px;
+        height: 55px;
+
+        font-size: 26px;
+    }
+}
